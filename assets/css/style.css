@@ -1,0 +1,202 @@
+/* GLOBAL COLORS */
+:root {
+    --primary: #ff5722;
+    --secondary: #fff3e0;
+    --dark: #2c2c2c;
+}
+
+/* BODY */
+body {
+    background-color: var(--secondary);
+    color: var(--dark);
+    margin: 0;
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: var(--primary) !important;
+}
+
+/* BUTTON */
+.btn-primary, .btn-warning {
+    background-color: var(--primary);
+    border: none;
+}
+
+.btn-primary:hover, .btn-warning:hover {
+    background-color: #e64a19;
+}
+
+/* HERO */
+.hero {
+    min-height: 60vh;
+    background: #ffe0b2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--dark); /* FIXED */
+    text-align: center;
+    padding: 40px 20px;
+}
+
+/* CARD */
+.card {
+    border-radius: 15px;
+    padding: 15px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* BADGE */
+.badge {
+    font-size: 12px;
+    padding: 5px 10px;
+}
+
+/* MENU CARD */
+.menu-card {
+    position: relative;
+}
+
+/* IMAGE */
+.menu-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* VEG / NONVEG */
+.veg-indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.veg {
+    background-color: green;
+}
+
+.nonveg {
+    background-color: red;
+}
+
+/* PRODUCT PAGE */
+#product-details img {
+    border-radius: 15px;
+}
+
+#product-details h2 {
+    font-weight: bold;
+}
+
+#product-details {
+    margin-top: 30px;
+}
+
+/* FLOATING BUTTONS */
+.call-btn, .whatsapp-btn {
+    position: fixed;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    font-size: 22px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 999;
+    transition: 0.3s;
+}
+
+.call-btn {
+    bottom: 90px;
+    background-color: #007bff;
+}
+
+.whatsapp-btn {
+    bottom: 20px;
+    background-color: #25D366;
+}
+
+.call-btn:hover,
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+}
+
+/* SMALL BUTTON */
+button {
+    padding: 5px 10px;
+    margin: 2px;
+}
+
+/* ========================= */
+/* 🔥 CART TABLE FIX (IMPORTANT) */
+/* ========================= */
+
+#cart-table td {
+    vertical-align: middle;
+}
+
+/* Quantity column fix */
+#cart-table td:nth-child(2) {
+    white-space: nowrap;   /* prevents line break */
+}
+
+/* Quantity buttons alignment */
+#cart-table button {
+    padding: 4px 8px;
+    margin: 0 3px;
+}
+
+/* ========================= */
+/* 📱 MOBILE FIXES */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+    .hero {
+        min-height: auto;
+        padding: 50px 20px;
+    }
+
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .menu-img {
+        height: 120px;
+    }
+
+    .card {
+        margin-bottom: 15px;
+    }
+
+    /* Cart table mobile */
+    #cart-table {
+        font-size: 14px;
+    }
+
+    #cart-table td {
+        padding: 6px;
+    }
+
+    #cart-table button {
+        padding: 3px 6px;
+    }
+}
