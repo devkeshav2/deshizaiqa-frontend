@@ -1,3 +1,16 @@
+function generateOrderId(){
+    const now = new Date();
+
+    const datePart =
+        String(now.getDate()).padStart(2,'0') +
+        String(now.getMonth()+1).padStart(2,'0') +
+        String(now.getFullYear()).slice(-2);
+
+    const randomPart = Math.floor(1000 + Math.random() * 9000);
+
+    return `DZ-${datePart}-${randomPart}`;
+}
+
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function updateCartCount(){
@@ -55,12 +68,22 @@ function addToCart(id){
     } else {
         cart.push({
             ...item,
-            qty: 1   // ✅ THIS WAS MISSING
+            qty: 1
         });
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
+
+    // ✅ SweetAlert Toast
+    Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: `${item.name} added 🛒`,
+        showConfirmButton: false,
+        timer: 1200
+    });
 }
 
 function addToCartFromApi(id, name, price, type){
@@ -81,6 +104,15 @@ function addToCartFromApi(id, name, price, type){
 
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
+
+    Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: `${name} added 🛒`,
+        showConfirmButton: false,
+        timer: 1200
+    });
 }
 
 function loadCart(){
@@ -140,36 +172,127 @@ function changeQty(id, delta){
     updateCartCount(); // 🔥 update badge
 }
 function removeItem(id){
-cart = cart.filter(x=>x.id != id);
-localStorage.setItem("cart", JSON.stringify(cart));
-loadCart();
-updateCartCount();
+    cart = cart.filter(x=>x.id != id);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+    updateCartCount();
+
+    Swal.fire({
+        icon: 'warning',
+        title: 'Item removed',
+        showConfirmButton: false,
+        timer: 1000
+    });
 }
 
 function clearCart(){
-cart = [];
-localStorage.setItem("cart", JSON.stringify(cart));
-loadCart();
-updateCartCount();
+ $("#grand-total").addClass("d-none");
+    if(cart.length === 0){
+        Swal.fire({
+            icon: 'info',
+            title: 'Cart already empty',
+            timer: 1000,
+            showConfirmButton: false
+        });
+        return;
+    }
+
+    Swal.fire({
+        title: 'Clear cart?',
+        text: "All items will be removed",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, clear it',
+        confirmButtonColor: '#ff5722'
+    }).then((result) => {
+        if(result.isConfirmed){
+            cart = [];
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart();
+            updateCartCount();
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Cart cleared',
+                timer: 1000,
+                showConfirmButton: false
+            });
+        }
+    });
 }
 
 function placeOrder(){
 
-if(cart.length === 0){
-alert("Cart is empty!");
-return;
-}
+    if(cart.length === 0){
+        Swal.fire({
+            icon: 'error',
+            title: 'Cart is empty!',
+            text: 'Please add items first'
+        });
+        return;
+    }
 
-let msg = "Deshizaiqa Order:%0A";
+    // 🧾 Build items message
+    let msg = "Deshizaiqa Order:%0A";
 
-cart.forEach(item=>{
-msg += `${item.name} x${item.qty} = ₹${item.price * item.qty}%0A`;
-});
+    cart.forEach(item=>{
+        msg += `${item.name} x${item.qty} = ₹${item.price * item.qty}%0A`;
+    });
 
-let total = cart.reduce((sum,i)=>sum+(i.price*i.qty),0);
-msg += `Total: ₹${total}`;
+    let total = cart.reduce((sum,i)=>sum+(i.price*i.qty),0);
+    msg += `Total: ₹${total}%0A%0A`;
 
-window.open(`https://wa.me/919372897262?text=${msg}`);
+    // 🧑‍💻 SweetAlert Form
+    Swal.fire({
+        title: 'Enter Delivery Details',
+        html: `
+            <input id="custName" class="swal2-input" placeholder="Your Name">
+            <input id="custPhone" class="swal2-input" placeholder="Phone Number">
+            <textarea id="custAddress" class="swal2-textarea" placeholder="Full Address"></textarea>
+        `,
+        confirmButtonText: 'Proceed to WhatsApp',
+        confirmButtonColor: '#ff5722',
+        focusConfirm: false,
+        preConfirm: () => {
+
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+
+            if(!name || !phone || !address){
+                Swal.showValidationMessage('Please fill all details');
+                return false;
+            }
+
+            return { name, phone, address };
+        }
+    }).then((result) => {
+
+        if(result.isConfirmed){
+
+            let user = result.value;
+            let orderId = generateOrderId();
+            let finalMsg = 
+            `Order ID: ${orderId}%0A%0A` + msg +
+            `Name: ${user.name}%0A` +
+            `Phone: ${user.phone}%0A` +
+            `Address: ${user.address}`;
+
+            // 🚀 Open WhatsApp
+            window.open(`https://wa.me/919372897262?text=${finalMsg}`);
+
+            // 🎉 Success feedback
+            Swal.fire({
+            icon: 'success',
+            title: 'Order Sent 🎉',
+            html: `
+             <b>Order ID:</b> ${orderId}<br>
+             Save this for reference
+            `,
+            confirmButtonColor: '#ff5722'
+        });
+        }
+    });
 }
 
 $("#filter").change(function(){
