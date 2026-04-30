@@ -380,6 +380,56 @@ function loadProduct(){
         });
 }
 
+function submitFeedback(){
+
+    let rating = document.getElementById("rating").value;
+    let improve = document.getElementById("improve").value;
+    let suggestion = document.getElementById("suggestion").value;
+
+    // ✅ validation
+    if(!suggestion){
+    Swal.fire({
+        icon: 'warning',
+        title: 'Please share your feedback 🙂'
+    });
+    return;
+    }
+
+    fetch("https://deshizaiqa-backend.onrender.com/api/feedback", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            rating: rating,
+            improve: improve,
+            suggestion: suggestion
+        })
+    })
+    .then(res => res.json())
+    .then(() => {
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Thanks for your feedback ❤️',
+            text: 'We will improve based on your input',
+            confirmButtonColor: '#ff5722'
+        });
+
+        // ✅ clear form
+        document.getElementById("rating").value = "";
+        document.getElementById("improve").value = "";
+        document.getElementById("suggestion").value = "";
+    })
+    .catch(() => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Something went wrong',
+            text: 'Please try again later'
+        });
+    });
+}
+
 $(document).ready(function(){
 updateCartCount();
 
@@ -396,4 +446,34 @@ fetch("https://deshizaiqa-backend.onrender.com/api/products")
 if($("#cart-items").length){
 loadCart();
 }
+
+document.getElementById("feedbackType").addEventListener("change", function(){
+    let type = this.value;
+    let improve = document.getElementById("improve");
+
+    if(type === "food"){
+        improve.innerHTML = `
+            <option value="">Skip</option>
+            <option>Taste</option>
+            <option>Quantity</option>
+            <option>Freshness</option>
+        `;
+    }
+    else if(type === "service"){
+        improve.innerHTML = `
+            <option value="">Skip</option>
+            <option>Delivery Time</option>
+            <option>Behavior</option>
+            <option>Packaging</option>
+        `;
+    }
+    else {
+        improve.innerHTML = `
+            <option value="">Skip</option>
+            <option>App Experience</option>
+            <option>Price</option>
+            <option>Menu Variety</option>
+        `;
+    }
+});
 });

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Deshi Zaiqa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/png" href="assets/images/favicon.ico">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="assets/js/script.js"></script>
+</head>
+
+<div class="container mt-5">
+
+    <h3 class="text-center fw-bold">💬 Your Feedback Matters</h3>
+
+    <p class="text-center text-muted">
+        Help us improve taste, service & menu 🙏
+    </p>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
+
+            <div class="card p-4">
+                <label class="fw-bold">Feedback Type</label>
+                <select id="feedbackType" class="form-control mt-2">
+                    <option value="general">General Suggestion</option>
+                    <option value="service">Service Feedback</option>
+                    <option value="food">Food Feedback</option>
+                </select>
+                <label class="fw-bold mt-3">⭐ Rating (optional)</label>
+                <select id="rating" class="form-control mt-2">
+                    <option value="">Skip</option>
+                    <option value="5">⭐ 5 - Excellent</option>
+                    <option value="4">⭐ 4 - Good</option>
+                    <option value="3">⭐ 3 - Average</option>
+                    <option value="2">⭐ 2 - Poor</option>
+                    <option value="1">⭐ 1 - Bad</option>
+                </select>
+
+                <label class="fw-bold mt-3">What can we improve? (optional)</label>
+                <select id="improve" class="form-control mt-2">
+                    <option value="">Skip</option>
+                    <option value="Taste">Taste</option>
+                    <option value="Price">Price</option>
+                    <option value="Delivery">Delivery</option>
+                    <option value="App Experience">App Experience</option>
+                </select>
+
+                <!-- SUGGESTION -->
+                <label class="fw-bold mt-3">Your Feedback</label>
+                <textarea id="suggestion" class="form-control mt-2" rows="3"
+                    placeholder="Tell us anything... what you liked, disliked, or want next"></textarea>
+
+                <!-- BUTTON -->
+                <button class="btn btn-warning mt-4 w-100" onclick="submitFeedback()">
+                    Submit Feedback
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</html>
