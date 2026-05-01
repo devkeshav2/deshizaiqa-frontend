@@ -2,49 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Deshi Zaiqa</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Open Graph Meta Tags -->
-<!-- BASIC SEO -->
-<meta name="title" content="Deshi Zaiqa 🍽 - Apna Desi Adda">
-<meta name="description" content="Fresh Egg Roll, Chowmein & Momos 😋 Order now on WhatsApp. Fast service in Nari Village, Nalanda.">
+<title>Deshi Zaiqa — Apna Desi Adda | Fresh Street Food, Nari Village, Nalanda</title>
+<meta name="description" content="Fresh Egg Roll, Chowmein & Momos at Deshi Zaiqa. Order now on WhatsApp. Fast service in Nari Village, Nalanda, Bihar.">
 <meta name="keywords" content="Deshi Zaiqa, Nari Village food, Egg Roll, Chowmein, Momos, Street Food Nalanda, Bihar food delivery">
-<meta name="author" content="Deshi Zaiqa">
 <meta name="robots" content="index, follow">
+<meta name="theme-color" content="#ff5722">
 
-<!-- OPEN GRAPH (WhatsApp / Facebook / LinkedIn) -->
 <meta property="og:title" content="Deshi Zaiqa 🍽 - Apna Desi Adda">
 <meta property="og:description" content="Fresh Egg Roll, Chowmein & Momos 😋 Fast service & affordable prices. Order on WhatsApp now!">
 <meta property="og:image" content="https://www.deshizaiqa.com/assets/images/hero-bg.png?v=3">
 <meta property="og:url" content="https://www.deshizaiqa.com">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Deshi Zaiqa">
-
-<!-- IMAGE SIZE (improves rendering) -->
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-
-<!-- TWITTER (also used by some apps) -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Deshi Zaiqa 🍽 - Apna Desi Adda">
-<meta name="twitter:description" content="Fresh Egg Roll, Chowmein & Momos 😋 Order now on WhatsApp!">
 <meta name="twitter:image" content="https://www.deshizaiqa.com/assets/images/hero-bg.png?v=3">
 
-<!-- MOBILE THEME -->
-<meta name="theme-color" content="#ff5722">
+<link rel="icon" href="assets/images/favicon.ico">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
-<link rel="icon" type="image/png" href="assets/images/favicon.ico">
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Restaurant",
-  "@id": "https://www.deshizaiqa.com",
   "name": "Deshizaiqa Food Court",
   "image": "https://www.deshizaiqa.com/assets/images/hero-bg.png",
   "url": "https://www.deshizaiqa.com",
   "telephone": "+91-9372897262",
-
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Nari Village, Nalanda District",
@@ -53,257 +38,219 @@
     "postalCode": "803114",
     "addressCountry": "IN"
   },
-
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 25.211545125112725,
-    "longitude": 85.44919105554065
-  },
-
-  "servesCuisine": [
-    "Indian Street Food",
-    "North Indian",
-    "Fast Food"
-  ],
-
+  "geo": { "@type": "GeoCoordinates", "latitude": 25.211545125112725, "longitude": 85.44919105554065 },
+  "servesCuisine": ["Indian Street Food", "North Indian", "Fast Food"],
   "priceRange": "₹",
-
   "menu": "https://www.deshizaiqa.com/menu.html",
-
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
-      ],
-      "opens": "10:00",
-      "closes": "22:00"
-    }
-  ],
-
-  "areaServed": [
-    {
-      "@type": "City",
-      "name": "Bihar Sharif"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Nalanda"
-    },
-    {
-      "@type": "State",
-      "name": "Bihar"
-    }
-  ]
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "10:00",
+    "closes": "22:00"
+  }]
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-<div class="container">
-<a class="navbar-brand" href="#">🍽 Deshi Zaiqa</a>
-<ul class="navbar-nav ms-auto">
-<li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
-<li class="nav-item"><a class="nav-link" href="cart.html">Cart <span id="cart-count" class="badge bg-danger">0</span></a></li>
-<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-</ul>
+<div id="navbar-placeholder"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🟢 Open Now · Nari Village, Nalanda</div>
+    <h1>Deshi <span>Zaiqa</span></h1>
+    <p class="hero-sub">Apna Desi Adda ❤️ — Fresh Egg Roll, Chowmein &amp; Momos</p>
+    <div class="hero-trust">
+      <span>⚡ 10–15 min prep</span>
+      <span>🚚 Nearby Delivery</span>
+      <span>💰 Starting ₹20</span>
+    </div>
+    <div class="hero-cta">
+      <a href="menu.html" class="btn-primary-custom">View Menu 🍔</a>
+      <a href="https://wa.me/919372897262?text=Hello%20I%20want%20to%20order"
+         class="btn-secondary-custom" target="_blank">Order on WhatsApp 💬</a>
+    </div>
+    <div class="hero-offer">🎉 Today's Offer: ₹10 OFF on 2 items</div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="row g-0 text-center">
+      <div class="col-6 col-md-3"><div class="stat-item"><span class="stat-number">100+</span><span class="stat-label">Happy Customers</span></div></div>
+      <div class="col-6 col-md-3"><div class="stat-item"><span class="stat-number">10+</span><span class="stat-label">Menu Items</span></div></div>
+      <div class="col-6 col-md-3"><div class="stat-item"><span class="stat-number">₹20</span><span class="stat-label">Starts From</span></div></div>
+      <div class="col-6 col-md-3"><div class="stat-item"><span class="stat-number">7</span><span class="stat-label">Days Open</span></div></div>
+    </div>
+  </div>
 </div>
-</nav>
 
-<section class="hero text-center">
-
-    <h1 class="fw-bold">
-        🍽 Deshi Zaiqa
-    </h1>
-
-    <p class="mt-3">
-        Apna Desi Adda ❤️ <br>
-        Fresh Egg Roll, Chowmein & Momos — Ab aapke paas!
-    </p>
-
-    <!-- TRUST LINE -->
-    <p class="mt-2 text-success fw-bold">
-        🟢 Open Now | ⚡ 10–15 min prep | 🚚 Nearby Delivery
-    </p>
-
-    <!-- CTA BUTTONS -->
-    <div class="mt-3">
-        <a href="menu.html" class="btn btn-warning px-4 me-2">
-            View Menu 🍔
-        </a>
-
-        <a href="https://wa.me/919372897262?text=Hello%20I%20want%20to%20order" 
-           class="btn btn-success px-4">
-            Order on WhatsApp 💬
-        </a>
-        <p class="text-danger fw-bold mt-2">
-    🎉 Today Offer: ₹10 OFF on 2 items
-       </p>
+<!-- BEST SELLERS -->
+<section class="bestseller-wrap">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Most Loved</div>
+      <h2 class="section-title">🔥 Best Sellers</h2>
+      <div class="section-divider"></div>
     </div>
-    
+    <div class="row justify-content-center">
 
-</section>
-<section class="container mt-5">
-
-    <h3 class="text-center fw-bold">🔥 Best Sellers</h3>
-
-    <div class="row mt-4">
-
-        <div class="col-md-4 mb-3">
-            <div class="card text-center">
-                <img src="assets/images/1.jpg" class="menu-img">
-                <h5 class="mt-2">Egg Roll- ₹30</h5>
-                
-                <span class="badge bg-danger">🔥 Popular</span>
-            </div>
+      <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card bestseller-card">
+          <img src="assets/images/1.jpg" class="bs-img" alt="Egg Roll">
+          <div class="bs-body">
+            <div class="bs-name">Egg Roll</div>
+            <div class="bs-price">₹30</div>
+            <span class="badge bg-danger">🔥 Popular</span>
+          </div>
         </div>
+      </div>
 
-        <div class="col-md-4 mb-3">
-            <div class="card text-center">
-                <img src="assets/images/6.jpg" class="menu-img">
-                <h5 class="mt-2">Chowmein- ₹40</h5>
-                <span class="badge bg-warning text-dark">⭐ Most Ordered</span>
-            </div>
+      <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card bestseller-card">
+          <img src="assets/images/6.jpg" class="bs-img" alt="Chowmein">
+          <div class="bs-body">
+            <div class="bs-name">Chowmein</div>
+            <div class="bs-price">₹40</div>
+            <span class="badge bg-warning text-dark">⭐ Most Ordered</span>
+          </div>
         </div>
+      </div>
 
-        <div class="col-md-4 mb-3">
-            <div class="card text-center">
-                <img src="assets/images/8.jpg" class="menu-img">
-                <h5 class="mt-2">Momos- ₹50</h5>
-                <span class="badge bg-info text-dark">📦 New</span>
-            </div>
+      <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card bestseller-card">
+          <img src="assets/images/8.jpg" class="bs-img" alt="Momos">
+          <div class="bs-body">
+            <div class="bs-name">Momos</div>
+            <div class="bs-price">₹50</div>
+            <span class="badge bg-info text-dark">📦 New</span>
+          </div>
         </div>
+      </div>
 
     </div>
-
+    <div class="text-center mt-2">
+      <a href="menu.html" class="btn btn-warning px-4">See Full Menu →</a>
+    </div>
+  </div>
 </section>
-
-<section class="container text-center mt-5">
-
-    <h4 class="fw-bold">Serving Nari Village & Nearby Areas</h4>
-
-    <p class="mt-2">
-        Fresh, tasty and affordable street food — just near you.
-    </p>
-
-</section>
-
 
 <!-- WHY US -->
-<section class="container mt-5">
-
-    <h3 class="text-center fw-bold">Why Choose Us?</h3>
-
-    <div class="row text-center mt-4">
-
-        <div class="col-md-3 col-6 mb-3">
-            <div class="card p-3">
-                <h5>🔥 Fresh Food</h5>
-                <p>Always served hot</p>
-            </div>
-        </div>
-
-        <div class="col-md-3 col-6 mb-3">
-            <div class="card p-3">
-                <h5>💰 Affordable</h5>
-                <p>Fits every budget</p>
-            </div>
-        </div>
-
-        <div class="col-md-3 col-6 mb-3">
-            <div class="card p-3">
-                <h5>⚡ Fast Service</h5>
-                <p>Quick preparation</p>
-            </div>
-        </div>
-
-        <div class="col-md-3 col-6 mb-3">
-            <div class="card p-3">
-                <h5>❤️ Great Taste</h5>
-                <p>Customers love it</p>
-            </div>
-        </div>
-
+<section class="why-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Why Us</div>
+      <h2 class="section-title">Why Choose Deshi Zaiqa?</h2>
+      <div class="section-divider"></div>
     </div>
-
+    <div class="row g-4">
+      <div class="col-md-3 col-6">
+        <div class="card why-card">
+          <span class="why-icon">🔥</span>
+          <h5>Fresh Food</h5>
+          <p>Always served hot &amp; fresh</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="card why-card">
+          <span class="why-icon">💰</span>
+          <h5>Affordable</h5>
+          <p>Fits every budget</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="card why-card">
+          <span class="why-icon">⚡</span>
+          <h5>Fast Service</h5>
+          <p>10–15 min preparation</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="card why-card">
+          <span class="why-icon">❤️</span>
+          <h5>Great Taste</h5>
+          <p>Loved by hundreds</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-
 
 <!-- CUSTOMER REVIEWS -->
-<section class="container mt-5">
+<section class="reviews-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">What Our Customers Say</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="row g-4">
 
-    <h3 class="text-center fw-bold">Customer Reviews</h3>
-
-    <div class="row mt-4">
-
-        <div class="col-md-4 mb-3">
-            <div class="card p-3 text-center">
-                <p>"Bahut tasty hai, maza aa gaya!"</p>
-                <h6>- Amit</h6>
-            </div>
+      <div class="col-md-4">
+        <div class="card review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Bahut tasty hai, maza aa gaya! Egg roll toh best hai puri duniya mein."</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="reviewer-avatar">A</div>
+            <span class="reviewer-name">Amit Kumar</span>
+          </div>
         </div>
+      </div>
 
-        <div class="col-md-4 mb-3">
-            <div class="card p-3 text-center">
-                <p>"Sasta aur best quality!"</p>
-                <h6>- Pooja</h6>
-            </div>
+      <div class="col-md-4">
+        <div class="card review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Sasta aur best quality! Itni achi chowmein pehle kabhi nahi khayi."</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="reviewer-avatar">P</div>
+            <span class="reviewer-name">Pooja Singh</span>
+          </div>
         </div>
+      </div>
 
-        <div class="col-md-4 mb-3">
-            <div class="card p-3 text-center">
-                <p>"Momos aur chowmin awesome hai!"</p>
-                <h6>- Rahul</h6>
-            </div>
+      <div class="col-md-4">
+        <div class="card review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Momos aur chowmin awesome hai! Delivery bhi bahut jaldi hoti hai."</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="reviewer-avatar">R</div>
+            <span class="reviewer-name">Rahul Verma</span>
+          </div>
         </div>
+      </div>
 
     </div>
-
+  </div>
 </section>
 
-
-<!-- FINAL CTA -->
-<section class="text-center mt-5 mb-5">
-
-    <h4>Hungry? 😋</h4>
-
-    <a href="menu.html" class="btn btn-warning px-4">
-        Order Now
-    </a>
-
+<!-- CTA BEFORE FOOTER -->
+<section class="text-center py-5" style="background:var(--surface);">
+  <div class="container">
+    <h3 style="font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:10px;">Hungry? 😋</h3>
+    <p style="color:#666;margin-bottom:24px;">Order fresh street food right now — quick prep, great taste.</p>
+    <a href="menu.html" class="btn btn-warning px-5 py-2" style="font-size:1rem;">Order Now</a>
+  </div>
 </section>
 
-<!-- 🔥 FEEDBACK CTA FOOTER -->
-<section class="feedback-cta text-center">
-
-    <div class="container">
-
-        <h4 class="fw-bold">
-            💬 Have any suggestion?
-        </h4>
-
-        <p class="mb-3">
-            Help us improve your food experience ❤️
-        </p>
-
-        <a href="feedback.html" class="btn btn-dark px-4 me-2">
-            Give Feedback
-        </a>
-
-        <a href="feedback.html" class="btn btn-outline-dark px-4">
-            Suggest New Item 🍔
-        </a>
-
-    </div>
-
+<!-- FEEDBACK CTA -->
+<section class="feedback-cta">
+  <div class="container">
+    <h4 class="fw-bold">💬 Have Any Suggestion?</h4>
+    <p>Help us improve your food experience ❤️</p>
+    <a href="feedback.html" class="btn btn-warning px-4 me-2">Give Feedback</a>
+    <a href="feedback.html" class="btn btn-outline-dark px-4">Suggest New Item 🍔</a>
+  </div>
 </section>
+
+<div id="footer-placeholder"></div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/components.js"></script>
 <script src="assets/js/script.js"></script>
 </body>
 </html>

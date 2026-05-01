@@ -23,30 +23,23 @@ function renderMenu(data = menu){
 
     data.forEach(item => {
 
-        html += `
-        <div class="col-md-4 mb-4">
-            <div class="card menu-card p-3 text-center">
-
-                <img src="assets/images/${item.id}.jpg"
-                     class="menu-img mb-2"
-                     alt="${item.name} at Deshizaiqa Food Court in Nari Village Nalanda Bihar">
-
-                <div class="veg-indicator ${item.type === 'veg' ? 'veg' : 'nonveg'}"></div>
-
-                <h5>${item.name}</h5>
-
-                <p class="text-muted">₹${item.price}</p>
-
-                <div class="d-flex gap-2">
-                    <button class="btn btn-warning w-50" onclick="addToCart(${item.id})">
-                        Add
-                    </button>
-
-                    <button class="btn btn-outline-dark w-50" onclick="viewDetails(${item.id})">
-                        Details
-                    </button>
+            html += `
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card menu-card">
+                <div class="menu-img-wrap">
+                    <img src="assets/images/${item.id}.jpg"
+                         class="menu-img"
+                         alt="${item.name} at Deshizaiqa Food Court in Nari Village Nalanda Bihar">
+                    <div class="veg-indicator ${item.type === 'veg' ? 'veg' : 'nonveg'}"></div>
                 </div>
-
+                <div class="menu-card-body">
+                    <div class="menu-card-name">${item.name}</div>
+                    <div class="menu-card-price">₹${item.price}</div>
+                    <div class="menu-card-actions">
+                        <button class="btn-add" onclick="addToCart(${item.id})">Add to Cart</button>
+                        <button class="btn-details" onclick="viewDetails(${item.id})">Details</button>
+                    </div>
+                </div>
             </div>
         </div>
         `;
@@ -152,7 +145,8 @@ function loadCart(){
     });
 
     $("#cart-items").html(html);
-    $("#grand-total").text("Grand Total: ₹" + total);
+    $("#grand-total-amount").text("₹" + total);
+    $("#cart-summary-bar").show();
 }
 function changeQty(id, delta){
     let item = cart.find(x => x.id == id);
@@ -186,8 +180,8 @@ function removeItem(id){
 }
 
 function clearCart(){
- $("#grand-total").text("");
- $("#grand-total").addClass("d-none");
+    $("#grand-total-amount").text("₹0");
+    $("#cart-summary-bar").hide();
     if(cart.length === 0){
         Swal.fire({
             icon: 'info',
@@ -296,7 +290,8 @@ function placeOrder(){
             // ✅ CLEAR CART HERE (AFTER USER SEES SUCCESS)
             cart = [];
             localStorage.setItem("cart", JSON.stringify(cart));
-            $("#grand-total").text("");
+            $("#grand-total-amount").text("₹0");
+            $("#cart-summary-bar").hide();
             loadCart();
             updateCartCount();
 
@@ -349,36 +344,26 @@ function loadProduct(){
             }
 
             let html = `
-            <div class="row align-items-center">
-
+            <div class="row align-items-center g-4">
                 <div class="col-md-5 text-center">
-                    <img src="assets/images/${item.id}.jpg" 
-                         class="img-fluid rounded shadow"
-                         style="max-height:300px;object-fit:cover;">
+                    <img src="assets/images/${item.id}.jpg"
+                         alt="${item.name}"
+                         style="border-radius:16px;width:100%;max-height:400px;object-fit:cover;box-shadow:0 10px 32px rgba(0,0,0,.12);">
                 </div>
-
                 <div class="col-md-7">
-
-                    <div class="position-relative">
-
-                        <div class="veg-indicator ${item.type === 'veg' ? 'veg' : 'nonveg'}"></div>
-
-                        <h2>${item.name}</h2>
-
-                        <h4 class="text-muted">₹${item.price}</h4>
-
-                        <p class="mt-3">
-                            Freshly prepared ${item.name} with authentic taste.
-                        </p>
-
-                        <button class="btn btn-warning mt-3" onclick="addToCartFromApi(${item.id}, '${item.name}', ${item.price}, '${item.type}')">
-                            Add to Cart
-                        </button>
-
+                    <div class="position-relative d-inline-block mb-2">
+                        <span class="veg-indicator ${item.type === 'veg' ? 'veg' : 'nonveg'}" style="position:static;display:inline-flex;margin-right:8px;vertical-align:middle;"></span>
+                        <small style="font-size:.78rem;font-weight:600;color:${item.type === 'veg' ? '#2e7d32' : '#c62828'};text-transform:uppercase;letter-spacing:1px;">${item.type === 'veg' ? 'Veg' : 'Non-Veg'}</small>
                     </div>
-
+                    <h2 style="font-family:'Playfair Display',serif;font-weight:700;">${item.name}</h2>
+                    <div class="product-price">₹${item.price}</div>
+                    <p style="color:#666;line-height:1.7;margin-bottom:24px;">
+                        Freshly prepared ${item.name} with authentic desi taste. Made with quality ingredients — served hot every time.
+                    </p>
+                    <button class="btn btn-warning px-4" onclick="addToCartFromApi(${item.id}, '${item.name}', ${item.price}, '${item.type}')">
+                        🛒 Add to Cart
+                    </button>
                 </div>
-
             </div>
             `;
 
@@ -506,7 +491,8 @@ if($("#cart-items").length){
 loadCart();
 }
 
-document.getElementById("feedbackType").addEventListener("change", function(){
+const feedbackTypeEl = document.getElementById("feedbackType");
+if(feedbackTypeEl) feedbackTypeEl.addEventListener("change", function(){
     let type = this.value;
     let improve = document.getElementById("improve");
 
