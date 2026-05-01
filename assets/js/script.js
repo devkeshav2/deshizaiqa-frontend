@@ -186,6 +186,7 @@ function removeItem(id){
 }
 
 function clearCart(){
+ $("#grand-total").text("");
  $("#grand-total").addClass("d-none");
     if(cart.length === 0){
         Swal.fire({
@@ -290,6 +291,15 @@ function placeOrder(){
              Save this for reference
             `,
             confirmButtonColor: '#ff5722'
+        }).then(() => {
+
+            // ✅ CLEAR CART HERE (AFTER USER SEES SUCCESS)
+            cart = [];
+            localStorage.setItem("cart", JSON.stringify(cart));
+            $("#grand-total").text("");
+            loadCart();
+            updateCartCount();
+
         });
         }
     });
@@ -382,6 +392,11 @@ function loadProduct(){
 
 function submitFeedback(){
 
+    let user = JSON.parse(localStorage.getItem("userInfo") || "{}");
+
+     let username =   user.name;
+      let userphone = user.phone;
+
     let rating = document.getElementById("rating").value;
     let improve = document.getElementById("improve").value;
     let suggestion = document.getElementById("suggestion").value;
@@ -403,7 +418,9 @@ function submitFeedback(){
         body: JSON.stringify({
             rating: rating,
             improve: improve,
-            suggestion: suggestion
+            suggestion: suggestion,
+            username: username,
+            userphone: userphone
         })
     })
     .then(res => res.json())
@@ -430,8 +447,50 @@ function submitFeedback(){
     });
 }
 
+function askUserDetails(){
+
+    Swal.fire({
+        title: 'Quick Info 😊',
+        text: 'So we can serve you better',
+        html: `
+            <input id="userName" class="swal2-input" placeholder="Your Name">
+            <input id="userPhone" class="swal2-input" placeholder="Mobile Number">
+        `,
+        confirmButtonText: 'Save',
+        confirmButtonColor: '#ff5722',
+        showCancelButton: true,
+        cancelButtonText: 'Skip',
+        focusConfirm: false,
+
+        preConfirm: () => {
+            const name = document.getElementById('userName').value.trim();
+            const phone = document.getElementById('userPhone').value.trim();
+
+            if(!name || !phone){
+                return { name: '', phone: '' }; // allow skip
+            }
+
+            return { name, phone };
+        }
+
+    }).then((result) => {
+
+        if(result.value){
+            localStorage.setItem("userInfo", JSON.stringify(result.value));
+        }
+    });
+}
+
 $(document).ready(function(){
 updateCartCount();
+
+let user = localStorage.getItem("userInfo");
+
+if(!user){
+    setTimeout(() => {
+        askUserDetails();
+    }, 6000); // 6 sec delay
+}
 
 if($("#menu-list").length){
 fetch("https://deshizaiqa-backend.onrender.com/api/products")
