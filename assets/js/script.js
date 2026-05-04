@@ -255,7 +255,7 @@ function loadProduct(){
         return;
     }
 
-    fetch(`http://localhost:8080/api/products/${id}`)
+    fetch(`https://deshizaiqa-backend.onrender.com/api/products/${id}`)
         .then(res => res.json())
         .then(item => {
             if(!item || !item.id){
@@ -325,7 +325,7 @@ function submitFeedback(){
         return;
     }
 
-    fetch("http://localhost:8080/api/feedback", {
+    fetch("https://deshizaiqa-backend.onrender.com/api/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ rating, improve, suggestion, username, userphone })
@@ -351,7 +351,7 @@ $(document).ready(function(){
     updateCartCount();
 
     if($("#menu-list").length){
-        fetch("http://localhost:8080/api/products")
+        fetch("https://deshizaiqa-backend.onrender.com/api/products")
             .then(res => res.json())
             .then(data => {
                 // Filter out disabled products for customers
