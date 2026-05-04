@@ -1,76 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Deshi Zaiqa</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product | Deshi Zaiqa</title>
+<meta name="theme-color" content="#ff5722">
+<link rel="icon" href="assets/images/favicon.ico">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
-<link rel="icon" type="image/png" href="assets/images/favicon.ico">
+<link rel="stylesheet" href="assets/css/auth.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-<div class="container">
-<a class="navbar-brand" href="index.html">🍽 Deshi Zaiqa</a>
 
-<ul class="navbar-nav ms-auto">
-<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
-<li class="nav-item">
-<a class="nav-link" href="cart.html">
-Cart <span id="cart-count" class="badge bg-danger">0</span>
-</a>
-</li>
-<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-</ul>
-</div>
-</nav>
+<div id="navbar-placeholder"></div>
 
-<div class="container mt-5">
-
-<div id="product-details"></div>
-
-<hr>
-
-<h4>⭐ Customer Reviews</h4>
-
-<div class="row mt-3">
-
-<div class="col-md-4">
-<div class="card p-3">
-<h6>Amit</h6>
-<div class="text-warning">⭐⭐⭐⭐⭐</div>
-<p>Very tasty and fresh!</p>
-</div>
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="container">
+    <h2>Product Detail</h2>
+    <p><a href="menu.html" style="color:rgba(255,255,255,.6);">Menu</a> &rsaquo; Details</p>
+  </div>
 </div>
 
-<div class="col-md-4">
-<div class="card p-3">
-<h6>Priya</h6>
-<div class="text-warning">⭐⭐⭐⭐</div>
-<p>Good quality and fast service.</p>
-</div>
+<div class="container pb-5">
+
+  <!-- Loaded by JS -->
+  <div id="product-details" class="mb-5"></div>
+
+  <hr style="border-color:#eee;margin:40px 0;">
+
+  <!-- REVIEWS -->
+  <div class="section-header" style="margin-bottom:32px;">
+    <div class="section-label">Reviews</div>
+    <h3 class="section-title" style="font-size:1.7rem;">Customer Reviews</h3>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Very tasty and fresh! Best street food in the area."</p>
+        <div class="d-flex align-items-center gap-3">
+          <div class="reviewer-avatar">A</div>
+          <span class="reviewer-name">Amit Kumar</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card review-card">
+        <div class="review-stars">★★★★☆</div>
+        <p class="review-text">"Good quality and really fast service. Will order again!"</p>
+        <div class="d-flex align-items-center gap-3">
+          <div class="reviewer-avatar">P</div>
+          <span class="reviewer-name">Priya Sharma</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Loved the taste! Absolutely authentic desi flavour."</p>
+        <div class="d-flex align-items-center gap-3">
+          <div class="reviewer-avatar">R</div>
+          <span class="reviewer-name">Rahul Verma</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<div class="col-md-4">
-<div class="card p-3">
-<h6>Rahul</h6>
-<div class="text-warning">⭐⭐⭐⭐⭐</div>
-<p>Loved the taste!</p>
-</div>
-</div>
-
-</div>
-
-</div>
+<div id="footer-placeholder"></div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/components.js"></script>
 <script src="assets/js/script.js"></script>
-
-<script>
-loadProduct();
-</script>
-
+<script>loadProduct();</script>
 </body>
 </html>
