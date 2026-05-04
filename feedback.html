@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feedback | Deshi Zaiqa</title>
+<meta name="description" content="Share your feedback with Deshi Zaiqa. Help us improve taste, service and your experience.">
+<meta name="theme-color" content="#ff5722">
+<link rel="icon" href="assets/images/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/auth.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+<div id="navbar-placeholder"></div>
+
+<!-- PAGE HEADER -->
+<div class="feedback-page-header">
+  <h2>💬 Your Feedback Matters</h2>
+  <p>Help us improve taste, service &amp; your experience 🙏</p>
+</div>
+
+<div class="container pb-5">
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+      <div class="card p-4" style="border-radius:20px;">
+
+        <!-- Optional user info (auto-filled if logged in) -->
+        <div class="mb-3">
+          <label class="form-label">Your Name <span style="color:#999;font-weight:400;">(optional)</span></label>
+          <input type="text" id="fbName" class="form-control" placeholder="Your name">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Mobile Number <span style="color:#999;font-weight:400;">(optional)</span></label>
+          <input type="tel" id="fbPhone" class="form-control" placeholder="+91 XXXXXXXXXX" inputmode="numeric">
+        </div>
+
+        <hr class="my-3">
+
+        <div class="mb-3">
+          <label class="form-label">Feedback Type</label>
+          <select id="feedbackType" class="form-select">
+            <option value="general">General Suggestion</option>
+            <option value="service">Service Feedback</option>
+            <option value="food">Food Feedback</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">⭐ Rating <span style="color:#999;font-weight:400;">(optional)</span></label>
+          <select id="rating" class="form-select">
+            <option value="">Skip</option>
+            <option value="5">⭐⭐⭐⭐⭐ &nbsp; Excellent</option>
+            <option value="4">⭐⭐⭐⭐ &nbsp; Good</option>
+            <option value="3">⭐⭐⭐ &nbsp; Average</option>
+            <option value="2">⭐⭐ &nbsp; Poor</option>
+            <option value="1">⭐ &nbsp; Bad</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">What can we improve? <span style="color:#999;font-weight:400;">(optional)</span></label>
+          <select id="improve" class="form-select">
+            <option value="">Skip</option>
+            <option value="Taste">Taste</option>
+            <option value="Price">Price</option>
+            <option value="Delivery">Delivery</option>
+            <option value="App Experience">App Experience</option>
+          </select>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Your Feedback</label>
+          <textarea id="suggestion" class="form-control" rows="4"
+            placeholder="Tell us anything… what you liked, disliked, or want to see next"></textarea>
+        </div>
+
+        <button class="btn btn-warning w-100 py-2" onclick="submitFeedback()">
+          Submit Feedback ✉️
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/components.js"></script>
+<script src="assets/js/script.js"></script>
+</body>
+</html>
