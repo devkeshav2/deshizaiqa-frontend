@@ -36,6 +36,7 @@
       <button class="sidebar-btn active" id="sbtn-dashboard" onclick="showSection('dashboard')">📊 Dashboard</button>
       <button class="sidebar-btn" id="sbtn-products"  onclick="showSection('products')">🍔 Products</button>
       <button class="sidebar-btn" id="sbtn-feedbacks" onclick="showSection('feedbacks')">💬 Feedbacks</button>
+      <button class="sidebar-btn" id="sbtn-customers" onclick="showSection('customers')">👥 Customers</button>
     </nav>
     <div class="sidebar-footer">
       <a href="index.html" class="sidebar-site-link">← View Live Site</a>
@@ -66,6 +67,10 @@
         <div class="admin-stat-card">
           <span class="admin-stat-num" id="stat-avg-rating">—</span>
           <span class="admin-stat-lbl">Avg Rating</span>
+        </div>
+        <div class="admin-stat-card">
+          <span class="admin-stat-num" id="stat-total-customers">—</span>
+          <span class="admin-stat-lbl">Total Customers</span>
         </div>
       </div>
 
@@ -108,6 +113,24 @@
       </div>
     </section>
 
+    <!-- ===== CUSTOMERS ===== -->
+    <section id="sec-customers" class="d-none">
+      <h2 class="admin-page-title">Customers</h2>
+      <p class="admin-page-sub">All registered users of Deshi Zaiqa</p>
+
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3 class="admin-card-title">Customer List</h3>
+        </div>
+
+        <div class="admin-table-wrap">
+          <div id="customers-wrap">
+            <div class="admin-loading">Loading customers…</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 </div>
 
@@ -120,15 +143,19 @@
   const API = 'https://deshizaiqa-backend.onrender.com';
   let allProducts  = [];
   let allFeedbacks = [];
+  let allCustomers = [];
 
   /* ===================== SECTION NAV ===================== */
   function showSection(name) {
-    ['dashboard', 'products', 'feedbacks'].forEach(s => {
+    ['dashboard', 'products', 'feedbacks', 'customers'].forEach(s => {
       document.getElementById('sec-' + s).classList.add('d-none');
       document.getElementById('sbtn-' + s).classList.remove('active');
     });
     document.getElementById('sec-' + name).classList.remove('d-none');
     document.getElementById('sbtn-' + name).classList.add('active');
+
+    // Load customers only when opened
+    if (name === 'customers') loadCustomers();
   }
 
   /* ===================== PRODUCTS ===================== */
@@ -167,7 +194,7 @@
       return `
         <tr>
           <td><img src="assets/images/${p.itemImage}.jpg" class="prod-thumb" alt="${p.name}" onerror="this.style.opacity='.3'"></td>
-          <td><strong>${p.name}</strong>${p.tag ? ' <span class="badge-special">' + p.tag + '</span>' : ''}</td>
+          <td><strong>${p.name}</strong>${p.tag ? ' <span class="badge-special">' + getTagLabel(p.tag) + '</span>' : ''}</td>
           <td><strong>₹${p.price}</strong></td>
           <td><span class="${typeClass}">${typeLabel}</span></td>
           <td>${statusBadge}</td>
@@ -213,10 +240,17 @@
           <select id="pf-type" class="swal2-select" style="margin:0 0 14px;width:100%;border-radius:8px;padding:10px">
             <option value="veg"    ${isEdit && product.type === 'veg'    ? 'selected' : ''}>🟢 Vegetarian</option>
             <option value="nonveg" ${isEdit && product.type === 'nonveg' ? 'selected' : ''}>🔴 Non-Vegetarian</option>
+            <option value="special"  ${isEdit && product.type === 'special'  ? 'selected' : ''}>⚪ Special</option>
           </select>
 
           <label style="font-size:.85rem;font-weight:600;color:#555;margin-bottom:4px;display:block">Tag <span style="font-weight:400;color:#bbb">(optional — e.g. "special")</span></label>
-          <input id="pf-tag" class="swal2-input" placeholder="special / new / bestseller" value="${isEdit && product.tag ? product.tag : ''}" style="margin:0;width:100%">
+          <select id="pf-tag" class="swal2-select" style="margin:0;width:100%;border-radius:8px;padding:10px">
+            <option value="">No Tag</option>
+            <option value="bestseller" ${isEdit && product.tag === 'bestseller' ? 'selected' : ''}>🔥 Bestseller</option>
+            <option value="must_try" ${isEdit && product.tag === 'must_try' ? 'selected' : ''}>⭐ Must Try</option>
+            <option value="new" ${isEdit && product.tag === 'new' ? 'selected' : ''}>🆕 New</option>
+            <option value="special" ${isEdit && product.tag === 'special' ? 'selected' : ''}>👑 Special</option>
+          </select>
         </div>`,
       confirmButtonText: isEdit ? 'Save Changes' : 'Add Product',
       confirmButtonColor: '#ff5722',
@@ -228,12 +262,12 @@
         const name  = document.getElementById('pf-name').value.trim();
         const price = parseInt(document.getElementById('pf-price').value);
         const type  = document.getElementById('pf-type').value;
-        const tag   = document.getElementById('pf-tag').value.trim();
+        const tag = document.getElementById('pf-tag').value;
 
         if (!name)      { Swal.showValidationMessage('Product name is required'); return false; }
         if (!price || price < 1) { Swal.showValidationMessage('Enter a valid price'); return false; }
 
-        return { name, price, type, tag: tag || undefined };
+        return { name, price, type, tag: tag || null };
       }
     }).then(result => {
       if (!result.isConfirmed) return;
@@ -250,6 +284,16 @@
     });
   }
 
+  function getTagLabel(tag) {
+  switch(tag) {
+    case 'bestseller': return '🔥 Bestseller';
+    case 'must_try': return '⭐ Must Try';
+    case 'new': return '🆕 New';
+    case 'special': return '👑 Special';
+    default: return '';
+  }
+}
+
   function createProduct(data) {
     fetch(API + '/api/products', {
       method: 'POST',
@@ -265,7 +309,7 @@
   }
 
   function updateProduct(id, data) {
-    fetch(API + '/api/products/' + id, {
+    fetch(API + '/api/products', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -384,6 +428,65 @@
       </div>`;
   }
 
+  
+
+function loadCustomers() {
+  fetch(API + '/api/users') 
+    .then(r => r.json())
+    .then(data => {
+      allCustomers = Array.isArray(data) ? data : (data.data || []);
+      renderCustomers();
+      updateStats();
+    })
+    .catch(() => {
+      document.getElementById('customers-wrap').innerHTML =
+        '<div class="admin-empty"><span class="admin-empty-icon">⚠️</span>Could not load customers.</div>';
+    });
+}
+
+function renderCustomers() {
+  const wrap = document.getElementById('customers-wrap');
+
+  if (!allCustomers.length) {
+    wrap.innerHTML = '<div class="admin-empty"><span class="admin-empty-icon">👥</span>No customers yet.</div>';
+    return;
+  }
+
+  let rows = allCustomers.map((c, i) => {
+    return `
+      <tr>
+        <td>${i + 1}</td>
+        <td><strong>${escHtml(c.userName || '—')}</strong></td>
+        <td>${escHtml(c.phoneNumber || '—')}</td>
+        <td>${formatDate(c.createdAt)}</td>
+      </tr>
+    `;
+  }).join('');
+
+  wrap.innerHTML = `
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Mobile</th>
+          <th>Joined</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '—';
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-IN', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric'
+  });
+}
   /* ===================== STATS ===================== */
   function updateStats() {
     const total   = allProducts.length;
@@ -396,6 +499,7 @@
     document.getElementById('stat-enabled-products').textContent = enabled;
     document.getElementById('stat-total-feedbacks').textContent  = fbCount;
     document.getElementById('stat-avg-rating').textContent       = avg !== '—' ? avg + ' ⭐' : '—';
+    document.getElementById('stat-total-customers').textContent = allCustomers.length;
   }
 
   /* ===================== UTILITIES ===================== */
