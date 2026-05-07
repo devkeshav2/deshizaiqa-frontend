@@ -193,7 +193,7 @@
 
       return `
         <tr>
-          <td><img src="${p.itemImage}" class="prod-thumb" alt="${p.name}" onerror="this.style.opacity='.3'"></td>
+          <td><img src="assets/images/${p.itemImage}.jpg" class="prod-thumb" alt="${p.name}" onerror="this.style.opacity='.3'"></td>
           <td><strong>${p.name}</strong>${p.tag ? ' <span class="badge-special">' + getTagLabel(p.tag) + '</span>' : ''}</td>
           <td><strong>₹${p.price}</strong></td>
           <td><span class="${typeClass}">${typeLabel}</span></td>
